@@ -1,10 +1,15 @@
 import { IPostItem } from '@/entities/posts/model/post.types'
+import { useDialogStore } from '@/shared/model/dialogStore'
+import { useSelectedStore } from '@/shared/model/selectStore'
 import { Button } from '@/shared/ui'
 import { MessageSquare } from 'lucide-react'
 
 const DetailPost = ({ post }: { post: IPostItem }) => {
+  const { setSelectedPost } = useSelectedStore()
+  const { setDetailPostStatus } = useDialogStore();
   const openPostDetail = (post: IPostItem) => {
-    console.log(post)
+    setSelectedPost(post);
+    setDetailPostStatus(true)
   }
   return (
     <Button variant="ghost" size="sm" onClick={() => openPostDetail(post)}>
