@@ -1,5 +1,4 @@
-import { createStore } from "zustand";
-import { persist } from "zustand/middleware";
+import { create } from "zustand";
 import { IPosterList } from "./post.types";
 
 interface IPostProps {
@@ -7,7 +6,6 @@ interface IPostProps {
 }
 
 interface IPostActions {
-  initializePosts: (posts: IPosterList[]) => void;
   setPosts: (posts: IPosterList[]) => void;
   addPost: (post: IPosterList) => void;
   updatePost: (post: IPosterList) => void;
@@ -16,26 +14,20 @@ interface IPostActions {
 
 export type PostStore = IPostProps & IPostActions;
 
-export const usePostStore = () => {
-  const INITIAL_POSTS: IPostProps = {
-    posts: [],
-  };
-  return createStore<PostStore>()(
-    persist((set) => ({
-      ...INITIAL_POSTS,
-      initializePosts: (posts) => set({ posts }),
-      setPosts: (posts) => set({ posts }),
-      addPost: (post) => set((state) => ({ posts: [...state.posts, post] })),
-      updatePost: (post) =>
-        set((state) => ({
-          posts: state.posts.map((p) => (p.id === post.id ? post : p)),
-        })),
-      removePost: (postId) =>
-        set((state) => ({
-          posts: state.posts.filter((post) => post.id !== postId),
-        })),
-    }),
-      { name: "post-storage" },
-    )
-  )
-}
+const INITIAL_POSTS: IPostProps = {
+  posts: [],
+};
+
+export const usePostStore = create<PostStore>((set) => ({
+  ...INITIAL_POSTS,
+  setPosts: (posts) => set({ posts }),
+  addPost: (post) => set((state) => ({ posts: [...state.posts, post] })),
+  updatePost: (post) =>
+    set((state) => ({
+      posts: state.posts.map((p) => (p.id === post.id ? post : p)),
+    })),
+  removePost: (postId) =>
+    set((state) => ({
+      posts: state.posts.filter((post) => post.id !== postId),
+    })),
+}));
