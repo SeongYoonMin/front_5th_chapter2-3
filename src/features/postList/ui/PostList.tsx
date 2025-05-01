@@ -5,13 +5,13 @@ import { useEffect } from 'react';
 import { usePosterList } from '../hooks/usePosterList';
 
 const PostList = () => {
-  const postStore = usePostStore();
+  const { setPosts } = usePostStore();
   const { poster, isLoading, isError } = usePosterList({ limit: 10, skip: 0 });
   useEffect(() => {
     if (poster) {
-      postStore.getState().setPosts(poster);
+      setPosts(poster);
     }
-  }, [poster, postStore]);
+  }, [poster, setPosts]);
 
   if (isLoading) {
     return <div>Loading...</div>;
