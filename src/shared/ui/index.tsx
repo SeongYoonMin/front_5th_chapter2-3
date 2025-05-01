@@ -47,9 +47,6 @@ interface HeadProps extends React.HTMLAttributes<HTMLHeadingElement> {
   className?: string
 }
 
-interface TextareaProps extends React.HTMLAttributes<HTMLTextAreaElement> {
-  className?: string
-}
 
 interface TableProps extends React.HTMLAttributes<HTMLTableElement> {
   className?: string
@@ -112,7 +109,7 @@ export const CardContent = forwardRef<HTMLDivElement, DivProps>(({ className, ..
 CardContent.displayName = "CardContent"
 
 // 텍스트 영역 컴포넌트
-export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(({ className, ...props }, ref) => {
+export const Textarea = forwardRef<HTMLTextAreaElement, React.TextareaHTMLAttributes<HTMLTextAreaElement>>(({ className, ...props }, ref) => {
   return (
     <textarea
       className={`flex min-h-[150px] w-full rounded-md border border-input bg-white px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 ${className}`}
