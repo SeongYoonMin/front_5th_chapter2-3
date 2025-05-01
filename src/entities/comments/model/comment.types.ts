@@ -13,6 +13,9 @@ export interface INewComment {
   userId: number;
 }
 
-export interface IResponseAddComment extends Omit<IComment, "likes"> {
+export interface IResponseAddComment {
+  body: string;
+  id: number;
+  postId: number;
   user: ICommentUser;
 }
