@@ -8,7 +8,6 @@ interface IUserProps {
 }
 
 interface IUserActions {
-  initializeUsers: (users: IUserData[]) => void;
   setUsers: (users: IUserData[]) => void;
   addUser: (post: IUserData) => void;
   updateUser: (post: IUserData) => void;
@@ -24,7 +23,6 @@ export const useUserStore = () => {
   return createStore<UserStore>()(
     persist((set) => ({
       ...INITIAL_POSTS,
-      initializeUsers: (users) => set({ users }),
       setUsers: (users) => set({ users }),
       addUser: (post) => set((state) => ({ users: [...state.users, post] })),
       updateUser: (post) =>
