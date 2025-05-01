@@ -1,23 +1,20 @@
 
 import { IPostItem } from "@/entities/posts/model/post.types"
-import { usePostStore } from "@/entities/posts/model/postStore"
 import { IUserData } from "@/entities/users/model/users.type"
 import DeletePost from "@/features/deletePost/ui/DeletePost"
 import DetailPost from "@/features/detailPost/ui/DetailPost"
+import PostReactions from "@/features/postReactions/ui/PostReactions"
 import UpdatePost from "@/features/updatePost/ui/UpdatePost"
 import { highlightText } from "@/shared/lib/highlightText"
 import { useQueryParams } from "@/shared/lib/useQueryParams"
-import { Button, TableCell, TableRow } from "@/shared/ui"
-import { Edit2, MessageSquare, ThumbsDown, ThumbsUp, Trash2 } from "lucide-react"
+import { TableCell, TableRow } from "@/shared/ui"
+
 type PosterList = { author?: IUserData } & IPostItem
 const PostItem = ({ post }: { post: PosterList }) => {
-  const postStore = usePostStore();
+
   const { searchQuery, selectedTag, setSelectedTag } = useQueryParams();
   const openUserModal = (author: IUserData) => {
     console.log(author)
-  }
-  const openPostDetail = (post: IPostItem) => {
-    console.log(post)
   }
   return (
     <TableRow>
@@ -52,12 +49,7 @@ const PostItem = ({ post }: { post: PosterList }) => {
         </div>
       </TableCell>
       <TableCell>
-        <div className="flex items-center gap-2">
-          <ThumbsUp className="w-4 h-4" />
-          <span>{post.reactions?.likes || 0}</span>
-          <ThumbsDown className="w-4 h-4" />
-          <span>{post.reactions?.dislikes || 0}</span>
-        </div>
+        <PostReactions likes={post.reactions?.likes || 0} dislikes={post.reactions?.dislikes || 0} />
       </TableCell>
       <TableCell className="flex items-center gap-2">
         <DetailPost post={post} />
