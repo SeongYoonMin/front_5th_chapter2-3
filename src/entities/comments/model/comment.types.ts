@@ -7,6 +7,14 @@ export interface IComment {
   likes: number;
 }
 
+export interface ICommentDetail extends IComment {
+  user: {
+    username: string;
+    id: number;
+    fullName: string;
+  };
+}
+
 export interface INewComment {
   body: string;
   postId: number | null;

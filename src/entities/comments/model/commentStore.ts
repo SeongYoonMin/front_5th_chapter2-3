@@ -1,18 +1,18 @@
 import { create } from "zustand";
-import { IComment } from "./comment.types";
+import { ICommentDetail } from "./comment.types";
 
 interface ICommentProps {
   total: number;
   skip: number;
   limit: number;
-  comments: IComment[]
+  comments: ICommentDetail[]
 }
 
 interface ICommentActions {
   setComments: (comments: ICommentProps) => void;
-  addComment: (comment: IComment) => void;
+  addComment: (comment: ICommentDetail) => void;
   removeComment: (commentId: number) => void;
-  updateComment: (commentId: number, updatedComment: IComment) => void;
+  updateComment: (commentId: number, updatedComment: ICommentDetail) => void;
 }
 
 export type CommentStore = ICommentProps & ICommentActions;
