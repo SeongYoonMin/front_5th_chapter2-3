@@ -1,21 +1,20 @@
+import { IPostItem } from "@/entities/posts/model/post.types";
+import { IUserData } from "@/entities/users/model/users.type";
+import DeletePost from "@/features/deletePost/ui/DeletePost";
+import PostReactions from "@/features/postReactions/ui/PostReactions";
 
-import { IPostItem } from "@/entities/posts/model/post.types"
-import { IUserData } from "@/entities/users/model/users.type"
-import DeletePost from "@/features/deletePost/ui/DeletePost"
-import DetailPost from "@/features/detailPost/ui/DetailPost"
-import PostReactions from "@/features/postReactions/ui/PostReactions"
-import UpdatePost from "@/features/updatePost/ui/UpdatePost"
-import { highlightText } from "@/shared/lib/highlightText"
-import { useQueryParams } from "@/shared/lib/useQueryParams"
-import { TableCell, TableRow } from "@/shared/ui"
+import { highlightText } from "@/shared/lib/highlightText";
+import { useQueryParams } from "@/shared/lib/useQueryParams";
+import { TableCell, TableRow } from "@/shared/ui";
+import PostItemDetail from "./PostItemDetail";
+import UpdatePost from "@/features/updatePost/ui/UpdatePost";
 
-type PosterList = { author?: IUserData } & IPostItem
+type PosterList = { author?: IUserData } & IPostItem;
 const PostItem = ({ post }: { post: PosterList }) => {
-
   const { searchQuery, selectedTag, setSelectedTag } = useQueryParams();
   const openUserModal = (author: IUserData) => {
-    console.log(author)
-  }
+    console.log(author);
+  };
   return (
     <TableRow>
       <TableCell>{post.id}</TableCell>
@@ -27,12 +26,13 @@ const PostItem = ({ post }: { post: PosterList }) => {
             {post.tags?.map((tag) => (
               <span
                 key={tag}
-                className={`px-1 text-[9px] font-semibold rounded-[4px] cursor-pointer ${selectedTag === tag
-                  ? "text-white bg-blue-500 hover:bg-blue-600"
-                  : "text-blue-800 bg-blue-100 hover:bg-blue-200"
-                  }`}
+                className={`px-1 text-[9px] font-semibold rounded-[4px] cursor-pointer ${
+                  selectedTag === tag
+                    ? "text-white bg-blue-500 hover:bg-blue-600"
+                    : "text-blue-800 bg-blue-100 hover:bg-blue-200"
+                }`}
                 onClick={() => {
-                  setSelectedTag(tag)
+                  setSelectedTag(tag);
                   // updateURL()
                 }}
               >
@@ -43,7 +43,10 @@ const PostItem = ({ post }: { post: PosterList }) => {
         </div>
       </TableCell>
       <TableCell>
-        <div className="flex items-center space-x-2 cursor-pointer" onClick={() => openUserModal(post.author as IUserData)}>
+        <div
+          className="flex items-center space-x-2 cursor-pointer"
+          onClick={() => openUserModal(post.author as IUserData)}
+        >
           <img src={post.author?.image} alt={post.author?.username} className="w-8 h-8 rounded-full" />
           <span>{post.author?.username}</span>
         </div>
@@ -52,12 +55,12 @@ const PostItem = ({ post }: { post: PosterList }) => {
         <PostReactions likes={post.reactions?.likes || 0} dislikes={post.reactions?.dislikes || 0} />
       </TableCell>
       <TableCell className="flex items-center gap-2">
-        <DetailPost post={post} />
+        <PostItemDetail post={post} />
         <UpdatePost post={post} />
         <DeletePost postId={post.id} />
       </TableCell>
     </TableRow>
-  )
-}
+  );
+};
 
-export default PostItem
+export default PostItem;
