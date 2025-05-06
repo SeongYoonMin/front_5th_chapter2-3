@@ -1,5 +1,11 @@
 import { IUserData } from "@/entities/users/model/users.type";
 
+export interface IPostAdd {
+  body: string;
+  title: string;
+  userId: number;
+}
+
 export interface IPostItem {
   body: string;
   id: number;
