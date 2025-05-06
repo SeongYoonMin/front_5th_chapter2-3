@@ -1,7 +1,14 @@
-import { customAxios } from "@/shared/api/customAxios"
-import { IComment } from "../model/comment.types";
+import { customAxios } from "@/shared/api/customAxios";
+import { ICommentDetail } from "../model/comment.types";
+
+export interface IResponseGetComments {
+  comments: ICommentDetail[];
+  total: number;
+  skip: number;
+  limit: number;
+}
 
 export const getComments = async ({ postId }: { postId: number }) => {
-  const response = await customAxios<{ total: number; limit: number; skip: number; comments: IComment[] }>(`/api/comments/post/${postId}`)
-  return response.data
-}
+  const { data } = await customAxios<IResponseGetComments>(`/api/comments/post/${postId}`);
+  return data;
+};
