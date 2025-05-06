@@ -2,16 +2,16 @@ import { Table, TableBody, TableHead, TableHeader, TableRow } from '@/shared/ui'
 import PostItem from './PostItem'
 import { usePostStore } from '@/entities/posts/model/postStore'
 import { useEffect } from 'react';
-import { usePosterList } from '../hooks/usePosterList';
+import { usePosterList } from '../model/usePosterList';
 
 const PostList = () => {
-  const { setPosts } = usePostStore();
+  const { setPosts, posts } = usePostStore();
   const { poster, isLoading, isError } = usePosterList({ limit: 10, skip: 0 });
   useEffect(() => {
     if (poster) {
       setPosts(poster);
     }
-  }, [poster, setPosts]);
+  }, [poster, setPosts, posts]);
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -32,7 +32,7 @@ const PostList = () => {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {poster.map((post) => (
+        {posts.map((post) => (
           <PostItem post={post} key={post.id} />
         ))}
       </TableBody>
