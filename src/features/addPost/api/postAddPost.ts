@@ -1,9 +1,11 @@
-import { IPostItem } from "@/entities/posts/model/post.types";
+import { IPostAdd, IPostItem } from "@/entities/posts/model/post.types";
 import { customAxios } from "@/shared/api/customAxios";
 
-export const postAddPost = async ({ newPost }: { newPost: IPostItem }) => {
-  const { data } = await customAxios.post("/api/posts/add", {
-    body: newPost,
-  })
-  return data
-}
+export const postAddPost = async ({ newPost }: { newPost: IPostAdd }) => {
+  const { data } = await customAxios.post<Pick<IPostItem, "id" | "body" | "title" | "userId">>("/api/posts/add", {
+    body: newPost.body,
+    title: newPost.title,
+    userId: newPost.userId,
+  });
+  return data;
+};
