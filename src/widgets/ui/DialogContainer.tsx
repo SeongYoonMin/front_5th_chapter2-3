@@ -1,21 +1,21 @@
-import AddCommentDialog from '@/shared/ui/AddCommentDialog'
-import AddPostDialog from '@/shared/ui/AddPostDialog'
-import DetailPostDialog from '@/shared/ui/DetailPostDialog'
-import DetailUserDialog from '@/shared/ui/DetailUserDialog'
-import UpdateCommentDialog from '@/shared/ui/UpdateCommentDialog'
-import UpdatePostDialog from '@/shared/ui/UpdatePostDialog'
+import AddCommentDialog from "@/features/addComment/ui/AddCommentDialog";
+import AddPostDialog from "@/features/addPost/ui/AddPostDialog";
+import PostDetailDialog from "@/features/detailPost/ui/PostDetailDialog";
+import DetailUserDialog from "@/features/detailUser/ui/DetailUserDialog";
+import UpdateCommentDialog from "@/features/updateComment/ui/UpdateCommentDialog";
+import UpdatePostDialog from "@/features/updatePost/ui/UpdatePostDialog";
 
 const DialogContainer = () => {
   return (
     <>
-      <AddCommentDialog />
       <AddPostDialog />
-      <DetailPostDialog />
+      <PostDetailDialog />
+      <AddCommentDialog />
       <DetailUserDialog />
       <UpdateCommentDialog />
       <UpdatePostDialog />
     </>
-  )
-}
+  );
+};
 
-export default DialogContainer
+export default DialogContainer;
