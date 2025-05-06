@@ -1,10 +1,9 @@
-import { usePostStore } from '@/entities/posts/model/postStore'
 import { Button } from '@/shared/ui'
 import { Trash2 } from 'lucide-react'
-import { useDeletePost } from '../hooks/useDeletePost';
+import { useDeletePost } from '../model/useDeletePost';
 
 const DeletePost = ({ postId }: { postId: number }) => {
-  const { removePost } = usePostStore();
+  
   const mutationDeletePost = useDeletePost();
   const onClickDeletePost = () => {
     mutationDeletePost.mutate({ id: postId });
