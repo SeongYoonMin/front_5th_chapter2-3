@@ -22,9 +22,9 @@ export const usePostStore = create<PostStore>((set) => ({
   ...INITIAL_POSTS,
   setPosts: (posts) => set({ posts }),
   addPost: (post) => set((state) => ({ posts: [...state.posts, post] })),
-  updatePost: (post) =>
+  updatePost: (newPost) =>
     set((state) => ({
-      posts: state.posts.map((p) => (p.id === post.id ? post : p)),
+      posts: state.posts.map((post) => (post.id === newPost.id ? newPost : post)),
     })),
   removePost: (postId) =>
     set((state) => ({
